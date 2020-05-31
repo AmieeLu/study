@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    // // 指向window
+    // function a() {
+    //     var user = "追梦子";
+    //     console.log(this.user) // undefined
+    //     console.log(this) // window
+    // }
+    // a()
+    // // 指向o  谁调用指向谁
+    // var o = {
+    //     user: '追梦子',
+    //     fn: function () {
+    //         console.log(this.user) //追梦子
+    //     }
+    // }
+    // o.fn()
+
+    // // 指向b b调用 
+    // var o = {
+    //     a: 10,
+    //     b: {
+    //         a: 12,
+    //         fn: function () {
+    //             console.log(this.a) // 12
+    //         }
+    //     }
+    // }
+    // o.b.fn()
+
+    // var o = {
+    //     a: 10,
+    //     b: {
+    //         fn: function () {
+    //             console.log(this.a) //undefined
+    //         }
+    //     }
+    // }
+    // o.b.fn()
+ 
+    // 赋值时 并没有执行 所以还是window调用
+    // var o = {
+    //     a:10,
+    //     b:{
+    //         a:12,
+    //         fn:function (){
+    //             console.log(this.a)
+    //             console.log(this)
+    //         }
+    //     }
+    // }
+    // var j = o.b.fn
+    // j()
+
+
+    // //  用了new关键字 等于复制了一份 new关键字可以改变this的指向
+    // function Fn(){
+    //     this.user ="追梦子"
+    // }
+    // var a  =  new Fn()
+    // console.log(a.user) // 追梦子
+
+
+    // this遇到return 如果返回的是一个对象 那么指向对象 如果返回值不是对象 择this指向函数的实例
+    // function fn() {
+    //     this.user='追梦子';
+    //     return function () {}  // undefined
+    // }
+    // function fn() {
+    //     this.user='追梦子';
+    //     return {}   // undefined
+    // }
+    // function fn() {
+    //     this.user='追梦子';
+    //     return 1 // 追梦子
+    // }
+    // function fn() {
+    //     this.user='追梦子';
+    //     return undefined // 追梦子
+    // }
+    // var a  = new fn;
+    // null也是对象 但是比较特殊
+    // function fn() {
+    //     this.user='追梦子';
+    //     return null
+    // }
+    // var a  = new fn; // 追梦子
+    //  console.log(a.user)
+
+    var name = '111'
+    // 指向window
+    // var object = {
+    //     name: '222',
+    //     getNameFun:function () {
+    //         return function () {
+    //             return this.name
+    //         }
+    //     }
+    // }
+     // 指向object
+    var object = {
+        name: '222',
+        getNameFun:function () {
+            var that = this
+            return function () {
+                return that.name
+            }
+        }
+    }
+    console.log(object.getNameFun()())
+</script>
+
+</html>
